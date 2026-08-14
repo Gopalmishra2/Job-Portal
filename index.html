@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobFinder - Job Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <i class="fa-solid fa-briefcase"></i>
+        JobFinder
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#companies">Companies</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-buttons">
+        <button class="login-btn" onclick="openLogin()">
+            Login
+        </button>
+
+        <button class="post-btn" onclick="openPostJob()">
+            Post a Job
+        </button>
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Find Your
+            <span>Dream Job</span>
+        </h1>
+
+        <p>
+            Search thousands of jobs from top companies and
+            start your next career journey.
+        </p>
+
+        <div class="search-box">
+
+            <div class="search-input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchTitle"
+                    placeholder="Job title, skills or keywords"
+                >
+            </div>
+
+            <div class="search-input">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input
+                    type="text"
+                    id="searchLocation"
+                    placeholder="City or location"
+                >
+            </div>
+
+            <button onclick="searchJobs()">
+                Search Jobs
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATISTICS ================= -->
+
+<section class="stats">
+
+    <div class="stat-card">
+        <i class="fa-solid fa-briefcase"></i>
+
+        <div>
+            <h2 id="totalJobs">0</h2>
+            <p>Jobs Available</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <i class="fa-solid fa-building"></i>
+
+        <div>
+            <h2>50+</h2>
+            <p>Companies</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <i class="fa-solid fa-users"></i>
+
+        <div>
+            <h2>10K+</h2>
+            <p>Job Seekers</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <i class="fa-solid fa-user-tie"></i>
+
+        <div>
+            <h2>5K+</h2>
+            <p>Jobs Filled</p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ================= JOB SECTION ================= -->
+
+<section class="jobs-section" id="jobs">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Latest Jobs</h2>
+
+            <p>
+                Explore the latest opportunities
+            </p>
+        </div>
+
+        <button
+            class="saved-btn"
+            onclick="showSavedJobs()"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+            Saved Jobs
+        </button>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <select id="categoryFilter" onchange="filterJobs()">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Java">
+                Java Developer
+            </option>
+
+            <option value="Frontend">
+                Frontend Developer
+            </option>
+
+            <option value="Backend">
+                Backend Developer
+            </option>
+
+            <option value="Full Stack">
+                Full Stack Developer
+            </option>
+
+            <option value="Testing">
+                Testing
+            </option>
+
+            <option value="Data">
+                Data Analyst
+            </option>
+
+        </select>
+
+
+        <select id="experienceFilter" onchange="filterJobs()">
+
+            <option value="all">
+                Experience
+            </option>
+
+            <option value="Fresher">
+                Fresher
+            </option>
+
+            <option value="0-2">
+                0-2 Years
+            </option>
+
+            <option value="2-5">
+                2-5 Years
+            </option>
+
+        </select>
+
+
+        <select id="salaryFilter" onchange="filterJobs()">
+
+            <option value="all">
+                Salary
+            </option>
+
+            <option value="3-5">
+                ₹3 - ₹5 LPA
+            </option>
+
+            <option value="5-8">
+                ₹5 - ₹8 LPA
+            </option>
+
+            <option value="8+">
+                ₹8+ LPA
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- JOB CARDS -->
+
+    <div id="jobContainer" class="job-container">
+
+    </div>
+
+
+    <div id="noJobs" class="no-jobs">
+
+        <i class="fa-solid fa-face-frown"></i>
+
+        <h3>No jobs found</h3>
+
+        <p>
+            Try changing your search or filters.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COMPANIES ================= -->
+
+<section class="companies" id="companies">
+
+    <h2>Top Companies Hiring</h2>
+
+    <p>
+        Build your career with leading companies.
+    </p>
+
+    <div class="company-grid">
+
+        <div class="company-card">
+            <div class="company-logo">T</div>
+            <h3>TechSolutions</h3>
+            <p>Technology</p>
+        </div>
+
+        <div class="company-card">
+            <div class="company-logo">I</div>
+            <h3>InnovateTech</h3>
+            <p>Software</p>
+        </div>
+
+        <div class="company-card">
+            <div class="company-logo">D</div>
+            <h3>DataWorks</h3>
+            <p>Data & Analytics</p>
+        </div>
+
+        <div class="company-card">
+            <div class="company-logo">C</div>
+            <h3>CloudNova</h3>
+            <p>Cloud Computing</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div>
+
+        <h2>About JobFinder</h2>
+
+        <p>
+            JobFinder is a modern job portal designed to connect
+            talented job seekers with companies looking for skilled
+            professionals.
+        </p>
+
+        <p>
+            Search jobs, save your favorite opportunities and apply
+            directly from the platform.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <h2>
+                <i class="fa-solid fa-briefcase"></i>
+                JobFinder
+            </h2>
+
+            <p>
+                Find your dream job today.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#jobs">Jobs</a>
+            <a href="#companies">Companies</a>
+
+        </div>
+
+        <div>
+
+            <h3>Contact</h3>
+
+            <p>
+                support@jobfinder.com
+            </p>
+
+            <p>
+                +91 98765 43210
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 JobFinder. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JOB DETAILS MODAL ================= -->
+
+<div id="jobModal" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal('jobModal')"
+        >
+            &times;
+        </span>
+
+        <div id="jobDetails">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= APPLY MODAL ================= -->
+
+<div id="applyModal" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal('applyModal')"
+        >
+            &times;
+        </span>
+
+        <h2>Apply for Job</h2>
+
+        <form id="applicationForm">
+
+            <input
+                type="text"
+                id="applicantName"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="applicantEmail"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="tel"
+                id="applicantPhone"
+                placeholder="Phone Number"
+                required
+            >
+
+            <input
+                type="text"
+                id="applicantExperience"
+                placeholder="Experience"
+                required
+            >
+
+            <textarea
+                id="applicantMessage"
+                placeholder="Why should we hire you?"
+                rows="5"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Submit Application
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div id="loginModal" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal('loginModal')"
+        >
+            &times;
+        </span>
+
+        <h2>Login</h2>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="demo-login">
+            Demo: any email and password
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= POST JOB MODAL ================= -->
+
+<div id="postJobModal" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeModal('postJobModal')"
+        >
+            &times;
+        </span>
+
+        <h2>Post a Job</h2>
+
+        <form id="postJobForm">
+
+            <input
+                type="text"
+                id="jobTitle"
+                placeholder="Job Title"
+                required
+            >
+
+            <input
+                type="text"
+                id="companyName"
+                placeholder="Company Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="jobLocation"
+                placeholder="Location"
+                required
+            >
+
+            <select id="jobCategory" required>
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <option value="Java">
+                    Java Developer
+                </option>
+
+                <option value="Frontend">
+                    Frontend Developer
+                </option>
+
+                <option value="Backend">
+                    Backend Developer
+                </option>
+
+                <option value="Full Stack">
+                    Full Stack Developer
+                </option>
+
+                <option value="Testing">
+                    Testing
+                </option>
+
+                <option value="Data">
+                    Data Analyst
+                </option>
+
+            </select>
+
+
+            <select id="jobExperience" required>
+
+                <option value="">
+                    Select Experience
+                </option>
+
+                <option value="Fresher">
+                    Fresher
+                </option>
+
+                <option value="0-2">
+                    0-2 Years
+                </option>
+
+                <option value="2-5">
+                    2-5 Years
+                </option>
+
+            </select>
+
+
+            <input
+                type="text"
+                id="jobSalary"
+                placeholder="Salary e.g. ₹5 - ₹8 LPA"
+                required
+            >
+
+            <textarea
+                id="jobDescription"
+                rows="5"
+                placeholder="Job Description"
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                Post Job
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
